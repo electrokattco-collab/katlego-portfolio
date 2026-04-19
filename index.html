@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katlego Plessie | Systems Developer & Problem Solver</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030816;
+      --bg2: #0a1128;
+      --card: rgba(13, 20, 38, 0.65);
+      --card-hover: rgba(17, 26, 48, 0.85);
+      --line: rgba(148, 163, 184, 0.12);
+      --line-bright: rgba(96, 165, 250, 0.4);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --blue: #3b82f6;
+      --blue-strong: #1d4ed8;
+      --purple: #8b5cf6;
+      --cyan: #06b6d4;
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      --glow: 0 0 20px rgba(59, 130, 246, 0.3);
+      --radius: 20px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--blue) var(--bg);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(59, 130, 246, 0.3);
+      border-radius: 10px;
+      border: 2px solid var(--bg);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(59, 130, 246, 0.6);
+    }
+
+    ::selection {
+      background: rgba(59, 130, 246, 0.3);
+      color: #fff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.05), transparent 30%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.8), transparent 80%);
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Enhanced Ambient Blobs */
+    .floating-blur {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatBlob 15s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+      mix-blend-mode: screen;
+    }
+
+    .blur-1 {
+      background: var(--blue);
+      top: -100px;
+      left: -100px;
+    }
+
+    .blur-2 {
+      background: var(--purple);
+      right: -100px;
+      top: 30vh;
+      animation-delay: -5s;
+    }
+
+    .blur-3 {
+      background: var(--cyan);
+      bottom: -50px;
+      left: 20vw;
+      animation-delay: -10s;
+    }
+
+    @keyframes floatBlob {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    .site {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Glassmorphic Navbar */
+    .navbar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(3, 8, 22, 0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .navbar {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+    }
+
+    .logo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
+      animation: pulseDot 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseDot {
+      0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 10px rgba(6, 182, 212, 0.5); }
+      100% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 25px rgba(6, 182, 212, 1), 0 0 40px rgba(59, 130, 246, 0.8); }
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      padding: 8px 16px;
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 0.9rem;
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+      background: rgba(255,255,255,0.05);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    
+    .nav-links a:hover::before,
+    .nav-links a.active::before {
+      opacity: 1;
+    }
+
+    /* Hero Section Enhancement */
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      min-height: calc(100vh - 80px);
+      padding: 80px 24px 40px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--blue);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      margin-bottom: 20px;
+      padding: 6px 12px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 100px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: riseIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 6.5vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      max-width: 760px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: riseIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 20%, #93c5fd 60%, #c4b5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(147, 197, 253, 0.2);
+    }
+
+    .hero-text {
+      max-width: 650px;
+      margin-top: 24px;
+      font-size: 1.1rem;
+      color: var(--muted);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: riseIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 36px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: riseIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-width: 160px;
+      padding: 14px 24px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      border: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0));
+      z-index: -1;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+    }
+
+    .btn:hover::after {
+      opacity: 1;
+    }
+
+    .btn.primary {
+      color: white;
+      background: linear-gradient(135deg, var(--blue-strong), var(--purple));
+      box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.5), inset 0 1px 1px rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .btn.primary:hover {
+      box-shadow: 0 15px 35px -5px rgba(37, 99, 235, 0.7), inset 0 1px 1px rgba(255,255,255,0.3);
+    }
+
+    .btn.secondary {
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn.secondary:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+    }
+
+    .btn.whatsapp {
+      color: white;
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.4), inset 0 1px 1px rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .btn.whatsapp:hover {
+      box-shadow: 0 15px 35px -5px rgba(34, 197, 94, 0.6), inset 0 1px 1px rgba(255,255,255,0.3);
+    }
+
+    /* Upgraded Terminal Panel */
+    .hero-panel {
+      position: relative;
+      background: rgba(10, 15, 30, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 1px; /* For gradient border effect */
+      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.7), 0 0 40px rgba(59, 130, 246, 0.1);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: riseIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(96,165,250,0.5), rgba(124,58,237,0.1) 50%, rgba(34,211,238,0.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .hero-panel-inner {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.8), rgba(10, 15, 30, 0.95));
+      border-radius: 23px;
+      padding: 28px;
+      height: 100%;
+    }
+
+    .mini-terminal {
+      position: relative;
+      z-index: 1;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .terminal-top {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .terminal-top span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.3);
+    }
+
+    .terminal-top span:nth-child(1) { background: #ff5f56; }
+    .terminal-top span:nth-child(2) { background: #ffbd2e; }
+    .terminal-top span:nth-child(3) { background: #27c93f; }
+
+    .code-line {
+      color: #93c5fd;
+      margin: 12px 0;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0; /* Started at 0 for animation */
+      border-right: 2px solid transparent;
+      animation: typing 2s steps(40, end) forwards;
+    }
+
+    .code-line:nth-child(2) { color: #f8fafc; animation-delay: 0.5s; }
+    .code-line:nth-child(3) { color: #f8fafc; animation-delay: 1.5s; }
+    .code-line:nth-child(4) { color: #f8fafc; animation-delay: 2.5s; }
+    .code-line:nth-child(5) { color: #4ade80; animation-delay: 3.5s; border-right: 2px solid #4ade80; animation: typing 1s steps(20, end) 3.5s forwards, blink 1s step-end 4.5s infinite; }
+
+    @keyframes typing {
+      from { width: 0; border-color: inherit; }
+      to { width: 100%; border-color: inherit; }
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: inherit; }
+    }
+
+    @keyframes riseIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Stats Section */
+    .stats {
+      max-width: var(--max);
+      margin: -20px auto 40px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .stat {
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-8px);
+      background: rgba(15, 23, 42, 0.7);
+      border-color: rgba(96,165,250,0.2);
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), var(--glow);
+    }
+    
+    .stat:hover::before {
+      opacity: 1;
+    }
+
+    .stat-number {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #fff, #93c5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 10px rgba(147, 197, 253, 0.3));
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* General Sections */
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 100px 24px;
+    }
+
+    .section-heading {
+      margin-bottom: 48px;
+      max-width: 800px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--cyan);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      margin-bottom: 16px;
+      padding: 6px 12px;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      border-radius: 100px;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      margin-top: 16px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    /* Grids */
+    .about-grid,
+    .skills-grid,
+    .projects-grid,
+    .live-links-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .about-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .skills-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .projects-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+    .live-links-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+    /* Universal Cards */
+    .card,
+    .skill-card,
+    .project-card,
+    .timeline-content,
+    .contact-box,
+    .filter-bar,
+    .live-link-card {
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .filter-bar {
+      padding: 16px 24px;
+      margin-bottom: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.4);
+    }
+
+    .card:hover,
+    .skill-card:hover,
+    .project-card:hover,
+    .timeline-content:hover,
+    .contact-box:hover,
+    .live-link-card:hover {
+      transform: translateY(-8px);
+      background: var(--card-hover);
+      border-color: var(--line-bright);
+      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.6), var(--glow);
+      z-index: 2;
+    }
+
+    .card h3,
+    .skill-card h3,
+    .project-card h3,
+    .timeline-content h3,
+    .contact-box h3,
+    .live-link-card h3 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .card p,
+    .skill-card li,
+    .project-card p,
+    .project-card li,
+    .timeline-content p,
+    .contact-box p,
+    .live-link-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Chips */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .chip {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      padding: 6px 12px;
+      border-radius: 8px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+    
+    .card:hover .chip {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    /* Lists inside cards */
+    .skill-card ul,
+    .project-card ul {
+      padding-left: 20px;
+      margin: 16px 0 0;
+    }
+    
+    .skill-card li,
+    .project-card li {
+      margin-bottom: 8px;
+      position: relative;
+      list-style: none;
+    }
+    
+    .skill-card li::before,
+    .project-card li::before {
+      content: '▹';
+      position: absolute;
+      left: -20px;
+      color: var(--blue);
+      font-weight: bold;
+    }
+
+    /* Skill Cards Specifics */
+    .skill-card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .skill-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -40px auto;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(59,130,246,0.15), transparent 70%);
+      border-radius: 50%;
+      transition: transform 0.4s ease;
+    }
+
+    .skill-card:hover::after {
+      transform: scale(1.5);
+    }
+
+    .skill-meter {
+      margin-top: 24px;
+    }
+
+    .skill-bar {
+      width: 100%;
+      height: 6px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.05);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .skill-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue));
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+      transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    }
+
+    .skill-level {
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: #93c5fd;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    /* Project Filtering & Cards */
+    .filter-btn {
+      border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.02);
+      color: var(--muted);
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(124,58,237,0.2));
+      border-color: rgba(96,165,250,0.4);
+      color: #fff;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+    }
+
+    .project-card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 150px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      pointer-events: none;
+    }
+
+    .project-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--bg);
+      background: linear-gradient(135deg, #93c5fd, #67e8f9);
+      padding: 6px 12px;
+      border-radius: 100px;
+      box-shadow: 0 4px 10px rgba(147, 197, 253, 0.2);
+    }
+
+    .project-card p {
+      flex-grow: 1;
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .small-link {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #93c5fd;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: rgba(59, 130, 246, 0.05);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+      transition: all 0.3s ease;
+    }
+    
+    a.small-link:hover {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.4);
+      color: #fff;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 32px;
+      margin-top: 32px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(59,130,246,0.5), rgba(139,92,246,0.1));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 56px;
+    }
+
+    .timeline-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--cyan);
+      position: absolute;
+      left: 9px;
+      top: 24px;
+      box-shadow: 0 0 0 6px var(--bg), 0 0 0 8px rgba(6, 182, 212, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      background: #fff;
+      box-shadow: 0 0 0 6px var(--bg), 0 0 0 10px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.8);
+    }
+
+    .meta {
+      color: #93c5fd;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin: -4px 0 12px;
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 6px;
+    }
+
+    /* Live Links specific */
+    .live-link-card {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .live-link-card p {
+      flex-grow: 1;
+    }
+
+    .live-link-card a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      margin-top: 16px;
+    }
+
+    .live-link-card a:hover {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+      box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Contact Grid */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .contact-box strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .contact-item {
+      padding: 16px 20px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.03);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .contact-item a {
+      color: var(--blue);
+      transition: color 0.2s;
+    }
+    
+    .contact-item a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .contact-item:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+      transform: translateX(5px);
+    }
+
+    /* Reveal Animations (Staggered via CSS) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Stagger children in grids for a cascading effect */
+    .reveal.visible .card,
+    .reveal.visible .skill-card,
+    .reveal.visible .project-card,
+    .reveal.visible .timeline-item,
+    .reveal.visible .live-link-card {
+      animation: popIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .reveal.visible > div > *:nth-child(1) { animation-delay: 0.1s; }
+    .reveal.visible > div > *:nth-child(2) { animation-delay: 0.2s; }
+    .reveal.visible > div > *:nth-child(3) { animation-delay: 0.3s; }
+    .reveal.visible > div > *:nth-child(4) { animation-delay: 0.4s; }
+    .reveal.visible > div > *:nth-child(5) { animation-delay: 0.5s; }
+    .reveal.visible > div > *:nth-child(6) { animation-delay: 0.6s; }
+    .reveal.visible > div > *:nth-child(7) { animation-delay: 0.7s; }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Footer & Extras */
+    .footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+      color: #64748b;
+      text-align: center;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 99;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(15,23,42,0.8);
+      backdrop-filter: blur(10px);
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px) scale(0.9);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .back-to-top:hover {
+      background: var(--blue);
+      transform: translateY(0) scale(1.1);
+      box-shadow: var(--glow);
+      border-color: var(--blue);
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 60px;
+        text-align: center;
+      }
+      
+      .eyebrow {
+        margin: 0 auto 20px;
+      }
+
+      .hero h1 {
+        margin: 0 auto;
+      }
+
+      .hero-text {
+        margin: 24px auto 0;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 16px;
+      }
+
+      .nav-links {
+        gap: 4px;
+        justify-content: center;
+      }
+      
+      .section {
+        padding: 80px 20px;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .timeline::before {
+        left: 20px;
+      }
+      .timeline-dot {
+        left: 14px;
+      }
+      .timeline-item {
+        padding-left: 48px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-panel-inner {
+        padding: 20px;
+      }
+      
+      .filter-bar {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-blur blur-1"></div>
+  <div class="floating-blur blur-2"></div>
+  <div class="floating-blur blur-3"></div>
+
+  <div class="site">
+    <div class="navbar-wrap">
+      <nav class="navbar">
+        <div class="logo"><span class="logo-dot"></span> Katlego.dev</div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <section class="hero" id="top">
+      <div>
+        <p class="eyebrow">Systems Development Intern • Web Dev • DevOps Exposure</p>
+        <h1><span class="gradient-text">Building, fixing,</span><br>and improving real systems.</h1>
+        <p class="hero-text">
+          I’m Katlego Plessie, a Systems Development Intern based in East Lynne, Pretoria.
+          I build, debug, and improve real systems — from web applications and dashboards
+          to APIs, deployments, and hardware troubleshooting. I’m also open for business
+          and available for freelance work and technical support.
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn primary">View Projects</a>
+          <a href="#contact" class="btn secondary">Contact Me</a>
+          <a href="https://wa.me/27627313073" target="_blank" rel="noopener" class="btn whatsapp">WhatsApp Me</a>
+          <a href="Katlego_Plessie_CV.pdf" download class="btn secondary">Download CV</a>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="hero-panel-inner">
+          <div class="mini-terminal">
+            <div class="terminal-top"><span></span><span></span><span></span></div>
+            <div class="code-line">&gt; initializing portfolio...</div>
+            <div class="code-line">&gt; loading projects: AI-SDR, Boxed, Store...</div>
+            <div class="code-line">&gt; checking APIs, UI, hardware, systems...</div>
+            <div class="code-line">&gt; compiling assets... 100%</div>
+            <div class="code-line">&gt; status: ready_to_build_more = true</div>
+            <div class="hero-buttons" style="margin-top:24px;">
+              <a href="https://wa.me/27627313073" target="_blank" rel="noopener" class="btn whatsapp" style="width:100%">Chat on WhatsApp</a>
+              <a href="Katlego_Plessie_CV.pdf" download class="btn secondary" style="width:100%">Download CV</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats reveal">
+      <div class="stat">
+        <div class="stat-number" data-count="8">0</div>
+        <div class="stat-label">Projects worked on</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" data-count="12">0</div>
+        <div class="stat-label">Core languages/tools</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" data-count="4">0</div>
+        <div class="stat-label">Work streams lived in</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" data-count="1">0</div>
+        <div class="stat-label">IPC training completed</div>
+      </div>
+    </section>
+
+    <section id="about" class="section reveal">
+      <div class="section-heading">
+        <div class="section-tag">About Me</div>
+        <h2>I solve practical problems with code and systems thinking.</h2>
+        <p class="section-sub">
+          I specialize in solving real-world problems using code, systems thinking, and hands-on troubleshooting.
+          My work spans web development, API integration, DevOps exposure, and practical IT support.
+          I’ve worked on live systems, built business-driven applications, and handled real debugging challenges —
+          not just tutorials.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <article class="card">
+          <h3>Technical Growth</h3>
+          <p>I’ve built websites, worked on dashboards, debugged APIs, tested local environments, and improved how interfaces behave in real usage.</p>
+          <div class="chip-row">
+            <span class="chip">Web Apps</span>
+            <span class="chip">Debugging</span>
+            <span class="chip">UI Logic</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Real-World Exposure</h3>
+          <p>At Xnext, I’ve been exposed to internal systems and workflows involving Coolify, OMS, Webmiro, deployments, debugging, and system integration thinking.</p>
+          <div class="chip-row">
+            <span class="chip">Xnext</span>
+            <span class="chip">Internal Systems</span>
+            <span class="chip">DevOps Exposure</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Beyond Coding</h3>
+          <p>I also run a small perfume resale business, which taught me customer focus, pricing, marketing, consistency, and execution.</p>
+          <div class="chip-row">
+            <span class="chip">Business</span>
+            <span class="chip">Sales</span>
+            <span class="chip">Marketing</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section reveal">
+      <div class="section-heading">
+        <div class="section-tag">Skills</div>
+        <h2>What I work with.</h2>
+      </div>
+
+      <div class="skills-grid">
+        <article class="skill-card">
+          <h3>Languages</h3>
+          <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>Python</li>
+            <li>C#</li>
+            <li>C++</li>
+            <li>Java</li>
+          </ul>
+          <div class="skill-meter"><div class="skill-bar"><div class="skill-fill" data-width="86%"></div></div><div class="skill-level">Strong Foundation</div></div>
+        </article>
+
+        <article class="skill-card">
+          <h3>Frontend</h3>
+          <ul>
+            <li>Responsive layouts</li>
+            <li>UI structuring</li>
+            <li>Landing pages</li>
+            <li>Forms and validation</li>
+            <li>Product and cart interfaces</li>
+          </ul>
+          <div class="skill-meter"><div class="skill-bar"><div class="skill-fill" data-width="82%"></div></div><div class="skill-level">Advanced Beginner</div></div>
+        </article>
+
+        <article class="skill-card">
+          <h3>Backend & APIs</h3>
+          <ul>
+            <li>API testing</li>
+            <li>Endpoint debugging</li>
+            <li>JSON handling</li>
+            <li>Frontend/backend integration</li>
+            <li>Localhost troubleshooting</li>
+          </ul>
+          <div class="skill-meter"><div class="skill-bar"><div class="skill-fill" data-width="74%"></div></div><div class="skill-level">Growing Fast</div></div>
+        </article>
+
+        <article class="skill-card">
+          <h3>Tools & Environments</h3>
+          <ul>
+            <li>Git & GitHub</li>
+            <li>Node.js</li>
+            <li>Vite</li>
+            <li>Coolify exposure</li>
+            <li>OMS / Webmiro exposure</li>
+          </ul>
+          <div class="skill-meter"><div class="skill-bar"><div class="skill-fill" data-width="78%"></div></div><div class="skill-level">Work Exposure</div></div>
+        </article>
+
+        <article class="skill-card">
+          <h3>Troubleshooting</h3>
+          <ul>
+            <li>Import and path issues</li>
+            <li>Module not found errors</li>
+            <li>Port conflicts</li>
+            <li>Broken CSS/layout bugs</li>
+            <li>Login flow checks</li>
+          </ul>
+          <div class="skill-meter"><div class="skill-bar"><div class="skill-fill" data-width="88%"></div></div><div class="skill-level">Strong</div></div>
+        </article>
+
+        <article class="skill-card">
+          <h3>Hardware</h3>
+          <ul>
+            <li>RAM fault diagnosis</li>
+            <li>3-beep boot issue checks</li>
+            <li>SSD vs HDD comparison</li>
+            <li>Upgrade decisions</li>
+            <li>Performance optimization thinking</li>
+          </ul>
+          <div class="skill-meter"><div class="skill-bar"><div class="skill-fill" data-width="76%"></div></div><div class="skill-level">Practical</div></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section reveal">
+      <div class="section-heading">
+        <div class="section-tag">Projects</div>
+        <h2>Things I’ve built and improved.</h2>
+        <p class="section-sub">Use the filters to switch between types of work.</p>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="systems">Systems</button>
+        <button class="filter-btn" data-filter="business">Business</button>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card" data-category="systems web">
+          <div class="project-top">
+            <h3>AI-SDR Platform</h3>
+            <span class="badge">Featured</span>
+          </div>
+          <p>Worked on a full AI Sales Development Representative platform involving frontend dashboards, backend APIs, and DevOps deployment. Contributed to system architecture, debugging, and preparing a working demo for around 100 customers.</p>
+          <ul>
+            <li>Built and tested FastAPI endpoints for customers, leads, orders, and dashboard workflows</li>
+            <li>Implemented lead scoring tiers and routing logic for different sales paths</li>
+            <li>Worked with React dashboard modules, analytics, and data tables</li>
+            <li>Handled Docker and Coolify deployment exposure for frontend and service setup</li>
+            <li>Debugged API failures, DB connection issues, 502 errors, and integration gaps</li>
+            <li>Worked with PostgreSQL, Redis, environment variables, and GitLab CI/CD workflows</li>
+          </ul>
+          <div class="project-links">
+            <a class="small-link" href="#live-links">Project Links</a>
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">DevOps + Full Flow</span>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="web business">
+          <div class="project-top">
+            <h3>Perfume Store Web App</h3>
+            <span class="badge">Store</span>
+          </div>
+          <p>Built a personal e-commerce style project using HTML, CSS, and JavaScript with product listings, search, filtering, cart flow, and payment mockup ideas.</p>
+          <div class="project-links">
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">HTML/CSS/JS</span>
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">E-commerce UI</span>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="web">
+          <div class="project-top">
+            <h3>Boxed Products Website</h3>
+            <span class="badge">Live Site</span>
+          </div>
+          <p>Built and improved a live website, handled fixes for layout and structure, worked with commits, deployment thinking, and added Google Analytics.</p>
+          <div class="project-links">
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">Analytics</span>
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">Deployment</span>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="web">
+          <div class="project-top">
+            <h3>Tekkie Business Website</h3>
+            <span class="badge">Client Project</span>
+          </div>
+          <p>My first independent web project for a small business, focused on product presentation, location display, user interaction, and EFT verification ideas.</p>
+          <div class="project-links">
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">Small Business</span>
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">UI Design</span>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="web systems">
+          <div class="project-top">
+            <h3>Admin Login / Dashboard UI</h3>
+            <span class="badge">UI Work</span>
+          </div>
+          <p>Worked with layout structure, styling issues, login behavior, and dashboard access flow, improving how the interface felt and behaved.</p>
+          <div class="project-links">
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">Login Flow</span>
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">Layout Fixes</span>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="systems">
+          <div class="project-top">
+            <h3>Fibre Management System (Concept)</h3>
+            <span class="badge">System Design</span>
+          </div>
+          <p>Designed a practical ISP-style management system for handling customers, field agents, and call centre workflows with incomplete and messy data.</p>
+          <ul>
+            <li>Structured dashboard, customer tables, and field task views</li>
+            <li>Designed status flows for trial, pre-order, and active customers</li>
+            <li>Planned around real-world data gaps like missing names, phone numbers, and partial records</li>
+          </ul>
+          <div class="project-links">
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">System Design</span>
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">UX Thinking</span>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="systems">
+          <div class="project-top">
+            <h3>System Troubleshooting</h3>
+            <span class="badge">Practical IT</span>
+          </div>
+          <p>Practical issue-solving involving boot problems, RAM-related faults, SSD and HDD comparisons, and performance-based decision making for real machines.</p>
+          <div class="project-links">
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">Hardware</span>
+            <span class="small-link" style="pointer-events:none; border:none; background:transparent;">Performance</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" class="section reveal">
+      <div class="section-heading">
+        <div class="section-tag">Experience</div>
+        <h2>What I’ve been doing.</h2>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>Systems Development Intern</h3>
+            <p class="meta">Xnext • 2026 – Present</p>
+            <p>Working in a real DevOps and software environment, contributing to system setup, debugging, API integration, dashboard workflows, and deployment support using Docker, Coolify, and GitLab.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>Freelance Web Development Projects</h3>
+            <p class="meta">2025 – Present</p>
+            <p>Built personal and business-focused web projects, improving layout design, usability, frontend logic, and confidence in shipping working interfaces.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>Independent Perfume Reseller</h3>
+            <p class="meta">2024 – Present</p>
+            <p>Run a small business through social media, handling customer communication, pricing, marketing, and trust-building.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>IPC Training with FPD</h3>
+            <p class="meta">Completed</p>
+            <p>Completed Interpersonal Counselling training with the Foundation for Professional Development, covering assessment, psychoeducation, grief, conflict, transitions, isolation, and counselling techniques.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>ICT Studies - Tshwane South College</h3>
+            <p class="meta">Level 2 &amp; Level 3</p>
+            <p>Built my foundation in ICT through programming basics, networking fundamentals, and early exposure to software development concepts.</p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>FreeCodeCamp - HTML &amp; CSS</h3>
+            <p class="meta">Completed</p>
+            <p>Completed online training focused on web structure, styling, and foundational frontend skills that supported my practical projects.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="live-links" class="section reveal">
+      <div class="section-heading">
+        <div class="section-tag">Live Links</div>
+        <h2>See what’s live and what’s available on request.</h2>
+        <p class="section-sub">Some work is public, while some company-related demos stay private. I only list what I can share openly.</p>
+      </div>
+
+      <div class="live-links-grid">
+        <div class="live-link-card">
+          <h3>Boxed Products</h3>
+          <p>Live public website project with multi-page layout, analytics setup, and ongoing frontend improvements.</p>
+          <a href="https://electrokattco-collab.github.io/boxedProducts/" target="_blank" rel="noopener">Open Live Site</a>
+        </div>
+
+        <div class="live-link-card">
+          <h3>Perfume Store Project</h3>
+          <p>Personal e-commerce style project. Demo and source walkthrough can be shared directly for reviews and business enquiries.</p>
+          <a href="mailto:electrokatt.co@gmail.com?subject=Perfume%20Store%20Project%20Demo">Request Demo</a>
+        </div>
+
+        <div class="live-link-card">
+          <h3>AI-SDR / Xnext Work</h3>
+          <p>Company-related system work is not publicly linked, but I can speak through my responsibilities, architecture exposure, and contributions.</p>
+          <a href="https://wa.me/27627313073" target="_blank" rel="noopener">Ask on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section reveal">
+      <div class="section-heading">
+        <div class="section-tag">Contact</div>
+        <h2>Let’s connect.</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-box">
+          <h3>Quick Info</h3>
+          <div class="contact-list">
+            <div class="contact-item"><strong>Name:</strong> Katlego Plessie</div>
+            <div class="contact-item"><strong>Email:</strong> <a href="mailto:electrokatt.co@gmail.com">electrokatt.co@gmail.com</a></div>
+            <div class="contact-item"><strong>Phone:</strong> <a href="tel:+27627313073">062 731 3073</a> (Call &amp; WhatsApp)</div>
+            <div class="contact-item"><strong>Location:</strong> East Lynne, Pretoria</div>
+            <div class="contact-item"><strong>Status:</strong> Open for work &amp; business</div>
+          </div>
+        </div>
+
+        <div class="contact-box">
+          <h3>Best Fit For</h3>
+          <p>Web development, junior software roles, systems support, debugging, deployment exposure, portfolio builds, and practical technical problem solving for clients and teams.</p>
+          <div class="chip-row">
+            <span class="chip">Junior Dev</span>
+            <span class="chip">Systems</span>
+            <span class="chip">Support</span>
+            <span class="chip">Problem Solver</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      Built by Katlego Plessie • Systems Developer • Open for Work &amp; Business
+    </div>
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script>
+    // Intersection Observer for Reveal Animations
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Skill Bar Fill Animation
+    const skillFills = document.querySelectorAll('.skill-fill');
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.style.width = entry.target.dataset.width;
+        skillObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+    skillFills.forEach(fill => skillObserver.observe(fill));
+
+    // Number Counter Animation
+    const counters = document.querySelectorAll('[data-count]');
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = Number(el.dataset.count);
+        let current = 0;
+        const step = Math.max(1, Math.ceil(target / 40));
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            el.textContent = target + "+"; // Added a slight enhancement for stats
+            clearInterval(timer);
+          } else {
+            el.textContent = current;
+          }
+        }, 40);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(el => counterObserver.observe(el));
+
+    // Project Filtering Logic
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        
+        projectCards.forEach(card => {
+          const categories = card.dataset.category;
+          // Slight animation reset for smooth filtering
+          card.style.animation = 'none';
+          card.offsetHeight; /* trigger reflow */
+          
+          if (filter === 'all' || categories.includes(filter)) {
+            card.classList.remove('hidden');
+            card.style.animation = 'popIn 0.5s ease both';
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Active Navbar Link Update on Scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    function setActiveLink() {
+      let current = '';
+      sections.forEach(section => {
+        const top = window.scrollY;
+        const offset = section.offsetTop - 150;
+        const height = section.offsetHeight;
+        if (top >= offset && top < offset + height) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+      });
+    }
+    window.addEventListener('scroll', setActiveLink);
+    setActiveLink();
+
+    // Back to Top Button
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 600) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Smooth Scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
