@@ -31,21 +31,21 @@ I am currently gaining industry exposure and working on projects that reflect re
 ### 📦 Perfume Stock Management System
 
 A Java-based application for managing retail inventory, allowing users to add, update, and track stock efficiently.
-🔗 *[Add your GitHub project link here]*
+🔗  [**https://electrokattco-collab.github.io/PerfumeStockSystem/**](https://electrokattco-collab.github.io/PerfumeStockSystem/)  
 
 ---
 
 ### 🌐 Personal Portfolio Website
 
 A personal portfolio showcasing my skills, projects, and development journey as a Systems Developer.
-🔗 *[Add your GitHub project link here]*
+🔗  [**https://electrokattco-collab.github.io/katlego-portfolio/**](https://electrokattco-collab.github.io/katlego-portfolio/)  
 
 ---
 
 ### 🧩 Fibre Management System
 
 A system designed to support fibre network operations with a modern UI and structured data handling.
-🔗 *[Add your GitHub project link here]*
+🔗  [**https://electrokattco-collab.github.io/Fibre-Managment-System/**](https://electrokattco-collab.github.io/Fibre-Managment-System/)  
 
 ---
 
@@ -71,9 +71,11 @@ My goal is to become a skilled software developer, working on impactful systems 
 
 ## 📫 Contact Me
 
-* 📧 Email: *[your email here]*
-* 💼 LinkedIn: *[your LinkedIn link here]*
-* 🌍 Portfolio: *[your website link if available]*
+* 📧 Email: *[electrokatt.co@gmail.com](mailto:electrokatt.co@gmail.com)*
+* 💼 LinkedIn:  
+
+  [www.linkedin.com/in/katPlessie](http://www.linkedin.com/in/katPlessie)
+* 🌍 Portfolio:  [**https://electrokattco-collab.github.io/katlego-portfolio/**](https://electrokattco-collab.github.io/katlego-portfolio/)  
 
 ---
 
