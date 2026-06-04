@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services & Pricing | Katlego Plessie</title>
+  <meta name="description" content="Transparent pricing for small business websites, reseller templates, and IT support in Pretoria. Websites from R800.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030816;
+      --bg2: #0a1128;
+      --card: rgba(13, 20, 38, 0.65);
+      --card-hover: rgba(17, 26, 48, 0.85);
+      --line: rgba(148, 163, 184, 0.12);
+      --line-bright: rgba(96, 165, 250, 0.4);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --cyan: #06b6d4;
+      --green: #22c55e;
+      --orange: #f97316;
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      --glow: 0 0 20px rgba(59, 130, 246, 0.3);
+      --radius: 20px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--blue) var(--bg); }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.3); border-radius: 10px; border: 2px solid var(--bg); }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.6); }
+    ::selection { background: rgba(59, 130, 246, 0.3); color: #fff; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.8), transparent 80%);
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .floating-blur {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatBlob 15s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+      mix-blend-mode: screen;
+    }
+    .blur-1 { background: var(--blue); top: -100px; left: -100px; }
+    .blur-2 { background: var(--purple); right: -100px; top: 30vh; animation-delay: -5s; }
+    .blur-3 { background: var(--cyan); bottom: -50px; left: 20vw; animation-delay: -10s; }
+
+    @keyframes floatBlob {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    .site { position: relative; z-index: 1; flex: 1; }
+
+    /* Navbar */
+    .navbar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(3, 8, 22, 0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+    }
+
+    .logo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
+      animation: pulseDot 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseDot {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      100% { transform: scale(1.15); opacity: 1; }
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      padding: 8px 16px;
+      border-radius: 12px;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover, .nav-links a.active { 
+      color: #fff; 
+      background: rgba(255,255,255,0.05); 
+    }
+
+    /* Header */
+    .page-header {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 60px 24px 40px;
+      text-align: center;
+    }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--cyan);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      margin-bottom: 16px;
+      padding: 6px 12px;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      border-radius: 100px;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-top: 16px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Services Grid */
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 40px;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--purple));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      background: var(--card-hover);
+      border-color: var(--line-bright);
+      box-shadow: var(--glow);
+    }
+
+    .service-card:hover::before { opacity: 1; }
+
+    .service-card.featured {
+      border-color: rgba(34, 197, 94, 0.3);
+      box-shadow: 0 0 30px rgba(34, 197, 94, 0.1);
+    }
+
+    .service-card.featured::before {
+      background: linear-gradient(90deg, var(--green), #16a34a);
+      opacity: 1;
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, var(--green), #16a34a);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 100px;
+    }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 24px;
+    }
+
+    .service-icon.web { background: rgba(59, 130, 246, 0.15); }
+    .service-icon.template { background: rgba(139, 92, 246, 0.15); }
+    .service-icon.support { background: rgba(249, 115, 22, 0.15); }
+
+    .service-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .service-card > p { color: var(--muted); margin-bottom: 24px; }
+
+    .price-tag {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--green);
+      margin-bottom: 20px;
+    }
+
+    .price-tag span { font-size: 0.9rem; color: var(--muted); font-weight: 500; }
+
+    .service-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px;
+    }
+
+    .service-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      color: var(--text);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+
+    .service-features li:last-child { border-bottom: none; }
+
+    .check { 
+      width: 20px; 
+      height: 20px; 
+      border-radius: 50%; 
+      background: rgba(34, 197, 94, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .service-cta {
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-align: center;
+      transition: all 0.3s;
+      display: block;
+    }
+
+    .service-cta.primary {
+      background: linear-gradient(135deg, var(--green), #16a34a);
+      color: white;
+    }
+
+    .service-cta.secondary {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    .service-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); }
+
+    .perfect-for {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .perfect-for strong { color: var(--text); }
+
+    /* Target Businesses Section */
+    .target-section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    .target-section h2 {
+      text-align: center;
+      margin: 0 0 40px;
+      font-size: 1.8rem;
+    }
+
+    .business-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .business-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .business-card:hover {
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-4px);
+    }
+
+    .business-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .business-card h4 { margin: 0 0 8px; font-size: 1rem; }
+    .business-card p { margin: 0; font-size: 0.85rem; color: var(--muted); }
+
+    /* CTA Section */
+    .cta-section {
+      max-width: var(--max);
+      margin: 40px auto 80px;
+      padding: 60px 40px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      text-align: center;
+    }
+
+    .cta-section h2 { margin: 0 0 16px; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+    .cta-section p { color: var(--muted); font-size: 1.1rem; margin: 0 0 32px; }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-width: 180px;
+      padding: 16px 28px;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn:hover { transform: translateY(-4px); }
+
+    .btn.primary {
+      color: white;
+      background: linear-gradient(135deg, var(--green), #16a34a);
+      box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.5);
+    }
+
+    .btn.secondary {
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      margin-left: 16px;
+    }
+
+    /* Footer */
+    .footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer p { color: var(--muted); margin: 0 0 16px; font-size: 0.9rem; }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .services-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .navbar { flex-direction: column; padding: 16px; }
+      .nav-links { gap: 4px; justify-content: center; }
+      .page-header { padding: 40px 24px; }
+      .section { padding: 0 20px 60px; }
+      .business-grid { grid-template-columns: repeat(2, 1fr); }
+      .cta-section { margin: 20px; padding: 40px 24px; }
+      .btn.secondary { margin-left: 0; margin-top: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-blur blur-1"></div>
+  <div class="floating-blur blur-2"></div>
+  <div class="floating-blur blur-3"></div>
+
+  <div class="site">
+    <!-- Navbar -->
+    <div class="navbar-wrap">
+      <nav class="navbar">
+        <a href="index.html" class="logo"><span class="logo-dot"></span> Katlego.Dev</a>
+        <ul class="nav-links">
+          <li><a href="services.html" class="active">Services & Pricing</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Header -->
+    <header class="page-header">
+      <div class="section-tag">Transparent Pricing</div>
+      <h1>Services & Pricing</h1>
+      <p>No hidden fees. Choose the service that fits your needs and budget.</p>
+    </header>
+
+    <!-- Services -->
+    <section class="section">
+      <div class="services-grid">
+        <!-- Service 1: Websites -->
+        <div class="service-card featured" id="websites">
+          <span class="popular-badge">Most Popular</span>
+          <div class="service-icon web">🌐</div>
+          <h3>Small Business Websites</h3>
+          <p>Professional one-page websites that help customers find and contact you online.</p>
+          
+          <div class="price-tag">R800 <span>– R1,500</span></div>
+          
+          <ul class="service-features">
+            <li><span class="check">✓</span> One-page "online flyer" design</li>
+            <li><span class="check">✓</span> WhatsApp click-to-chat button</li>
+            <li><span class="check">✓</span> Google Maps location</li>
+            <li><span class="check">✓</span> Contact form</li>
+            <li><span class="check">✓</span> Mobile-friendly (works on phones)</li>
+            <li><span class="check">✓</span> Social media links</li>
+            <li><span class="check">✓</span> Your photos & business info</li>
+          </ul>
+
+          <p class="perfect-for">
+            <strong>Perfect for:</strong> Hair salons, spaza shops, car washes, takeaways, 
+            funeral parlours, construction companies, tutors, mechanics, and more.
+          </p>
+
+          <a href="https://wa.me/27627313073?text=Hi%20Katlego,%20I'm%20interested%20in%20a%20business%20website" target="_blank" rel="noopener" class="service-cta primary">Get a Free Quote</a>
+        </div>
+
+        <!-- Service 2: Templates -->
+        <div class="service-card" id="templates">
+          <div class="service-icon template">🎨</div>
+          <h3>Reseller Website Templates</h3>
+          <p>Ready-made website templates for side-hustle sellers who want their own online store.</p>
+          
+          <div class="price-tag">R150 <span>– R250</span></div>
+          
+          <ul class="service-features">
+            <li><span class="check">✓</span> Perfume shop template</li>
+            <li><span class="check">✓</span> Sneaker reseller template</li>
+            <li><span class="check">✓</span> Cosmetics/accessories template</li>
+            <li><span class="check">✓</span> Product gallery layout</li>
+            <li><span class="check">✓</span> Easy to customize</li>
+            <li><span class="check">✓</span> WhatsApp order integration</li>
+          </ul>
+
+          <p class="perfect-for">
+            <strong>Perfect for:</strong> Perfume resellers, sneaker sellers, cosmetic sellers, 
+            phone accessory sellers, and online traders.
+          </p>
+
+          <a href="https://wa.me/27627313073?text=Hi%20Katlego,%20I'm%20interested%20in%20a%20website%20template" target="_blank" rel="noopener" class="service-cta secondary">View Templates</a>
+        </div>
+
+        <!-- Service 3: IT Support -->
+        <div class="service-card" id="support">
+          <div class="service-icon support">🔧</div>
+          <h3>IT Support & Tech Help</h3>
+          <p>Practical tech support for everyday problems. I come to you or help remotely.</p>
+          
+          <div class="price-tag">R50 <span>– R200</span></div>
+          
+          <ul class="service-features">
+            <li><span class="check">✓</span> New phone/laptop setup</li>
+            <li><span class="check">✓</span> Data transfer between devices</li>
+            <li><span class="check">✓</span> Virus & slow computer cleanup</li>
+            <li><span class="check">✓</span> Router/WiFi setup</li>
+            <li><span class="check">✓</span> Printer setup & troubleshooting</li>
+            <li><span class="check">✓</span> CV formatting & typing</li>
+            <li><span class="check">✓</span> Document scanning & emailing</li>
+          </ul>
+
+          <p class="perfect-for">
+            <strong>Perfect for:</strong> Home users, small offices, students, and anyone 
+            who needs reliable tech help without the jargon.
+          </p>
+
+          <a href="https://wa.me/27627313073?text=Hi%20Katlego,%20I%20need%20IT%20support" target="_blank" rel="noopener" class="service-cta secondary">Book Support</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Target Businesses -->
+    <section class="target-section">
+      <h2>Businesses That Benefit Most</h2>
+      <div class="business-grid">
+        <div class="business-card">
+          <div class="business-icon">💈</div>
+          <h4>Hair Salons & Barbers</h4>
+          <p>Show styles, prices, booking info</p>
+        </div>
+        <div class="business-card">
+          <div class="business-icon">🛒</div>
+          <h4>Spaza Shops</h4>
+          <p>Let customers know what you stock</p>
+        </div>
+        <div class="business-card">
+          <div class="business-icon">🚗</div>
+          <h4>Car Washes & Mechanics</h4>
+          <p>Services, prices, location</p>
+        </div>
+        <div class="business-card">
+          <div class="business-icon">🍔</div>
+          <h4>Food & Takeaways</h4>
+          <p>Menu, hours, WhatsApp orders</p>
+        </div>
+        <div class="business-card">
+          <div class="business-icon">🏗️</div>
+          <h4>Construction & Trades</h4>
+          <p>Portfolio and contact details</p>
+        </div>
+        <div class="business-card">
+          <div class="business-icon">🎓</div>
+          <h4>Tutors & Services</h4>
+          <p>Subjects, rates, availability</p>
+        </div>
+        <div class="business-card">
+          <div class="business-icon">⚰️</div>
+          <h4>Funeral Parlours</h4>
+          <p>Services, packages, 24/7 contact</p>
+        </div>
+        <div class="business-card">
+          <div class="business-icon">👟</div>
+          <h4>Resellers & Side Hustles</h4>
+          <p>Product galleries & WhatsApp sales</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <h2>Not sure what you need?</h2>
+      <p>WhatsApp me and I'll help you figure out the best option for your business.</p>
+      <a href="https://wa.me/27627313073?text=Hi%20Katlego,%20I'm%20not%20sure%20what%20service%20I%20need" target="_blank" rel="noopener" class="btn primary">💬 Chat on WhatsApp</a>
+      <a href="contact.html" class="btn secondary">Other Contact Options</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 Katlego Plessie | Websites & IT Support for Small Businesses in Pretoria</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

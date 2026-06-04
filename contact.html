@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Katlego Plessie</title>
+  <meta name="description" content="Get in touch for website design, IT support, or tech help in Pretoria. WhatsApp, phone, or email.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030816;
+      --bg2: #0a1128;
+      --card: rgba(13, 20, 38, 0.65);
+      --card-hover: rgba(17, 26, 48, 0.85);
+      --line: rgba(148, 163, 184, 0.12);
+      --line-bright: rgba(96, 165, 250, 0.4);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --cyan: #06b6d4;
+      --green: #22c55e;
+      --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      --glow: 0 0 20px rgba(59, 130, 246, 0.3);
+      --radius: 20px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--blue) var(--bg); }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.3); border-radius: 10px; border: 2px solid var(--bg); }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.6); }
+    ::selection { background: rgba(59, 130, 246, 0.3); color: #fff; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.8), transparent 80%);
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .floating-blur {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatBlob 15s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+      mix-blend-mode: screen;
+    }
+    .blur-1 { background: var(--blue); top: -100px; left: -100px; }
+    .blur-2 { background: var(--purple); right: -100px; top: 30vh; animation-delay: -5s; }
+    .blur-3 { background: var(--cyan); bottom: -50px; left: 20vw; animation-delay: -10s; }
+
+    @keyframes floatBlob {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    .site { position: relative; z-index: 1; flex: 1; }
+
+    /* Navbar */
+    .navbar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(3, 8, 22, 0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+    }
+
+    .logo-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
+      animation: pulseDot 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseDot {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      100% { transform: scale(1.15); opacity: 1; }
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      padding: 8px 16px;
+      border-radius: 12px;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover, .nav-links a.active { 
+      color: #fff; 
+      background: rgba(255,255,255,0.05); 
+    }
+
+    /* Header */
+    .page-header {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 60px 24px 40px;
+      text-align: center;
+    }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--cyan);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      margin-bottom: 16px;
+      padding: 6px 12px;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      border-radius: 100px;
+    }
+
+    .page-header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-top: 16px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Contact Section */
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 40px;
+    }
+
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 100px;
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    .availability-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .contact-card h3 {
+      margin: 0 0 24px;
+      font-size: 1.3rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 16px;
+      margin-bottom: 16px;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+    }
+
+    .contact-item:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+      transform: translateX(5px);
+    }
+
+    .contact-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .contact-icon.whatsapp { background: rgba(34, 197, 94, 0.15); }
+    .contact-icon.phone { background: rgba(59, 130, 246, 0.15); }
+    .contact-icon.email { background: rgba(139, 92, 246, 0.15); }
+    .contact-icon.location { background: rgba(249, 115, 22, 0.15); }
+
+    .contact-item div { flex: 1; }
+    .contact-item strong { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .contact-item span { font-size: 1.15rem; font-weight: 600; }
+    .contact-item a { color: inherit; }
+    .contact-item a:hover { color: var(--green); }
+
+    .response-time {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 24px;
+      padding: 20px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      border-radius: 16px;
+    }
+
+    .response-time strong { color: var(--green); }
+
+    /* Why Work With Me */
+    .why-card h3 { margin: 0 0 24px; font-size: 1.3rem; }
+
+    .why-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .why-list li {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      gap: 12px;
+    }
+
+    .why-list li:last-child { border-bottom: none; }
+
+    .why-list .check { color: var(--green); font-weight: bold; }
+    .why-list strong { color: var(--text); }
+    .why-list span { color: var(--muted); }
+
+    /* Quick Actions */
+    .quick-actions {
+      max-width: var(--max);
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+
+    .quick-actions h2 {
+      text-align: center;
+      margin: 0 0 32px;
+      font-size: 1.5rem;
+    }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .action-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 32px 24px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-4px);
+      border-color: var(--line-bright);
+      box-shadow: var(--glow);
+    }
+
+    .action-btn .icon {
+      font-size: 2.5rem;
+    }
+
+    .action-btn strong {
+      font-size: 1.1rem;
+    }
+
+    .action-btn span {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    .footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer p { color: var(--muted); margin: 0 0 16px; font-size: 0.9rem; }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .action-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .navbar { flex-direction: column; padding: 16px; }
+      .nav-links { gap: 4px; justify-content: center; }
+      .page-header { padding: 40px 24px; }
+      .section { padding: 0 20px 60px; }
+      .contact-card { padding: 28px; }
+      .quick-actions { padding: 0 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-blur blur-1"></div>
+  <div class="floating-blur blur-2"></div>
+  <div class="floating-blur blur-3"></div>
+
+  <div class="site">
+    <!-- Navbar -->
+    <div class="navbar-wrap">
+      <nav class="navbar">
+        <a href="index.html" class="logo"><span class="logo-dot"></span> Katlego.Dev</a>
+        <ul class="nav-links">
+          <li><a href="services.html">Services & Pricing</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Header -->
+    <header class="page-header">
+      <div class="section-tag">Get In Touch</div>
+      <h1>Let's Talk About Your Project</h1>
+      <p>Fast response times. No obligations. Just tell me what you need.</p>
+    </header>
+
+    <!-- Contact Grid -->
+    <section class="section">
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="availability">
+            <span class="availability-dot"></span>
+            <span>Currently accepting new projects</span>
+          </div>
+          
+          <h3>Contact Details</h3>
+          
+          <a href="https://wa.me/27627313073" target="_blank" rel="noopener" class="contact-item">
+            <div class="contact-icon whatsapp">💬</div>
+            <div>
+              <strong>WhatsApp (Fastest)</strong>
+              <span>062 731 3073</span>
+            </div>
+          </a>
+
+          <a href="tel:+27627313073" class="contact-item">
+            <div class="contact-icon phone">📞</div>
+            <div>
+              <strong>Phone</strong>
+              <span>062 731 3073</span>
+            </div>
+          </a>
+
+          <a href="mailto:electrokatt.co@gmail.com" class="contact-item">
+            <div class="contact-icon email">✉️</div>
+            <div>
+              <strong>Email</strong>
+              <span>electrokatt.co@gmail.com</span>
+            </div>
+          </a>
+
+          <div class="contact-item" style="cursor: default;">
+            <div class="contact-icon location">📍</div>
+            <div>
+              <strong>Location</strong>
+              <span>Meyerspark, Pretoria</span>
+            </div>
+          </div>
+
+          <div class="response-time">
+            <span>⚡</span>
+            <span><strong>Fast Response:</strong> I usually reply within 2 hours during business hours (8am–6pm)</span>
+          </div>
+        </div>
+
+        <div class="contact-card why-card">
+          <h3>Why Work With Me?</h3>
+          <ul class="why-list">
+            <li>
+              <span class="check">✓</span>
+              <div>
+                <strong>Local & Available</strong>
+                <span>Based in Meyerspark, Pretoria. I understand local businesses.</span>
+              </div>
+            </li>
+            <li>
+              <span class="check">✓</span>
+              <div>
+                <strong>No Tech Jargon</strong>
+                <span>I explain everything in plain language you understand.</span>
+              </div>
+            </li>
+            <li>
+              <span class="check">✓</span>
+              <div>
+                <strong>Transparent Pricing</strong>
+                <span>Fixed prices. No surprises or hidden costs.</span>
+              </div>
+            </li>
+            <li>
+              <span class="check">✓</span>
+              <div>
+                <strong>Fast Turnaround</strong>
+                <span>Most websites ready in 3–5 days.</span>
+              </div>
+            </li>
+            <li>
+              <span class="check">✓</span>
+              <div>
+                <strong>Ongoing Support</strong>
+                <span>I'm here if you need updates or changes later.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+      <h2>Quick Actions</h2>
+      <div class="action-grid">
+        <a href="https://wa.me/27627313073?text=Hi%20Katlego,%20I'm%20interested%20in%20a%20website%20for%20my%20business" target="_blank" rel="noopener" class="action-btn">
+          <span class="icon">🌐</span>
+          <strong>Get Website Quote</strong>
+          <span>Tell me about your business</span>
+        </a>
+        <a href="https://wa.me/27627313073?text=Hi%20Katlego,%20I%20need%20IT%20support" target="_blank" rel="noopener" class="action-btn">
+          <span class="icon">🔧</span>
+          <strong>Book IT Support</strong>
+          <span>Describe your tech problem</span>
+        </a>
+        <a href="https://wa.me/27627313073?text=Hi%20Katlego,%20I%20have%20a%20question" target="_blank" rel="noopener" class="action-btn">
+          <span class="icon">❓</span>
+          <strong>Ask a Question</strong>
+          <span>Not sure what you need?</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 Katlego Plessie | Websites & IT Support for Small Businesses in Pretoria</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

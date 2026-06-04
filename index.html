@@ -7,7 +7,7 @@
   <meta name="description" content="Affordable websites and IT support for small businesses in Pretoria and surrounding townships. One-page sites from R800. WhatsApp integration, Google Maps, contact forms.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #030816;
@@ -23,7 +23,6 @@
       --purple: #8b5cf6;
       --cyan: #06b6d4;
       --green: #22c55e;
-      --orange: #f97316;
       --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
       --glow: 0 0 20px rgba(59, 130, 246, 0.3);
       --glow-green: 0 0 20px rgba(34, 197, 94, 0.3);
@@ -54,6 +53,9 @@
       line-height: 1.7;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     body::before {
@@ -95,7 +97,7 @@
       100% { transform: translate(0, 0) scale(1); }
     }
 
-    .site { position: relative; z-index: 1; }
+    .site { position: relative; z-index: 1; flex: 1; }
 
     /* Navbar */
     .navbar-wrap {
@@ -160,11 +162,12 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       font-size: 0.9rem;
       font-weight: 500;
-      position: relative;
-      overflow: hidden;
     }
 
-    .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.05); }
+    .nav-links a:hover, .nav-links a.active { 
+      color: #fff; 
+      background: rgba(255,255,255,0.05); 
+    }
 
     /* Hero */
     .hero {
@@ -269,16 +272,8 @@
     }
     .btn.secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
 
-    .btn.whatsapp {
-      color: white;
-      background: linear-gradient(135deg, #16a34a, #22c55e);
-      box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.4);
-    }
-
-    /* Hero Image/Preview */
-    .hero-visual {
-      position: relative;
-    }
+    /* Hero Visual */
+    .hero-visual { position: relative; }
 
     .browser-mockup {
       background: rgba(10, 15, 30, 0.8);
@@ -306,10 +301,7 @@
     .browser-header span:nth-child(2) { background: #ffbd2e; }
     .browser-header span:nth-child(3) { background: #27c93f; }
 
-    .browser-content {
-      padding: 30px;
-      text-align: center;
-    }
+    .browser-content { padding: 30px; text-align: center; }
 
     .mock-site {
       background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
@@ -320,11 +312,7 @@
 
     .mock-site h3 { margin: 0 0 10px; font-size: 1.5rem; }
     .mock-site p { color: var(--muted); margin: 0 0 20px; }
-    .mock-buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-    }
+    .mock-buttons { display: flex; gap: 12px; justify-content: center; }
     .mock-btn {
       padding: 10px 20px;
       border-radius: 8px;
@@ -397,427 +385,82 @@
       color: var(--muted);
     }
 
-    /* Section Styles */
+    /* Services Preview */
     .section {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 100px 24px;
+      padding: 80px 24px;
     }
 
     .section-heading {
       text-align: center;
-      margin-bottom: 60px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
+      margin-bottom: 50px;
     }
 
-    .section-tag {
-      display: inline-block;
-      color: var(--cyan);
-      text-transform: uppercase;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      font-size: 0.75rem;
-      margin-bottom: 16px;
-      padding: 6px 12px;
-      background: rgba(6, 182, 212, 0.1);
-      border: 1px solid rgba(6, 182, 212, 0.2);
-      border-radius: 100px;
-    }
-
-    .section h2 {
+    .section-heading h2 {
       margin: 0;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      line-height: 1.15;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
       font-weight: 800;
-      letter-spacing: -0.02em;
     }
 
-    .section-sub {
-      color: var(--muted);
-      margin-top: 16px;
-      font-size: 1.1rem;
-    }
-
-    /* Services Grid */
-    .services-grid {
+    .services-preview {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
     }
 
-    .service-card {
-      background: var(--card);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 40px;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--blue), var(--purple));
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      background: var(--card-hover);
-      border-color: var(--line-bright);
-      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.6), var(--glow);
-    }
-
-    .service-card:hover::before { opacity: 1; }
-
-    .service-card.featured {
-      border-color: rgba(34, 197, 94, 0.3);
-      box-shadow: 0 0 30px rgba(34, 197, 94, 0.1);
-    }
-
-    .service-card.featured::before {
-      background: linear-gradient(90deg, var(--green), #16a34a);
-      opacity: 1;
-    }
-
-    .service-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin-bottom: 24px;
-    }
-
-    .service-icon.web { background: rgba(59, 130, 246, 0.15); }
-    .service-icon.template { background: rgba(139, 92, 246, 0.15); }
-    .service-icon.support { background: rgba(249, 115, 22, 0.15); }
-
-    .service-card h3 {
-      margin: 0 0 12px;
-      font-size: 1.4rem;
-      font-weight: 700;
-    }
-
-    .service-card > p { color: var(--muted); margin-bottom: 24px; }
-
-    .price-tag {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 4px;
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--green);
-      margin-bottom: 20px;
-    }
-
-    .price-tag span { font-size: 0.9rem; color: var(--muted); font-weight: 500; }
-
-    .service-features {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 28px;
-    }
-
-    .service-features li {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 0;
-      color: var(--text);
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-    }
-
-    .service-features li:last-child { border-bottom: none; }
-
-    .check { 
-      width: 20px; 
-      height: 20px; 
-      border-radius: 50%; 
-      background: rgba(34, 197, 94, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--green);
-      font-size: 0.8rem;
-      flex-shrink: 0;
-    }
-
-    .service-cta {
-      width: 100%;
-      padding: 14px 24px;
-      border-radius: 12px;
-      font-weight: 700;
-      text-align: center;
-      transition: all 0.3s;
-      display: block;
-    }
-
-    .service-cta.primary {
-      background: linear-gradient(135deg, var(--green), #16a34a);
-      color: white;
-    }
-
-    .service-cta.secondary {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--text);
-    }
-
-    .service-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3); }
-
-    .popular-badge {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, var(--green), #16a34a);
-      color: white;
-      font-size: 0.7rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      padding: 6px 12px;
-      border-radius: 100px;
-    }
-
-    /* How It Works */
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-
-    .step-card {
-      text-align: center;
-      padding: 40px 30px;
-      position: relative;
-    }
-
-    .step-number {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: 800;
-      margin: 0 auto 24px;
-    }
-
-    .step-card h3 { margin: 0 0 12px; font-size: 1.2rem; }
-    .step-card p { color: var(--muted); font-size: 0.95rem; margin: 0; }
-
-    /* Portfolio/Proof */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .portfolio-card {
+    .service-preview-card {
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      overflow: hidden;
+      padding: 36px 28px;
+      text-align: center;
       transition: all 0.4s;
     }
 
-    .portfolio-card:hover {
+    .service-preview-card:hover {
       transform: translateY(-8px);
       border-color: var(--line-bright);
       box-shadow: var(--glow);
     }
 
-    .portfolio-preview {
-      height: 180px;
-      background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.2));
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .service-preview-card .icon {
       font-size: 3rem;
+      margin-bottom: 16px;
     }
 
-    .portfolio-content { padding: 28px; }
-    .portfolio-content h3 { margin: 0 0 8px; font-size: 1.2rem; }
-    .portfolio-content p { color: var(--muted); font-size: 0.95rem; margin: 0 0 16px; }
-
-    .portfolio-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+    .service-preview-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.3rem;
     }
 
-    .portfolio-tag {
-      font-size: 0.75rem;
-      padding: 6px 12px;
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      border-radius: 6px;
-      color: #93c5fd;
-    }
-
-    /* Target Businesses */
-    .business-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
-
-    .business-card {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 16px;
-      padding: 30px 20px;
-      text-align: center;
-      transition: all 0.3s;
-    }
-
-    .business-card:hover {
-      background: rgba(255,255,255,0.05);
-      transform: translateY(-4px);
-    }
-
-    .business-icon { font-size: 2.5rem; margin-bottom: 16px; }
-    .business-card h4 { margin: 0 0 8px; font-size: 1rem; }
-    .business-card p { margin: 0; font-size: 0.85rem; color: var(--muted); }
-
-    /* CTA Section */
-    .cta-section {
-      max-width: var(--max);
-      margin: 0 auto 100px;
-      padding: 80px 40px;
-      background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 30px;
-      text-align: center;
-    }
-
-    .cta-section h2 { margin: 0 0 16px; font-size: clamp(1.8rem, 4vw, 2.5rem); }
-    .cta-section p { color: var(--muted); font-size: 1.1rem; margin: 0 0 32px; }
-
-    .cta-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* Contact Section */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: start;
-    }
-
-    .contact-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 40px;
-    }
-
-    .contact-card h3 { margin: 0 0 24px; font-size: 1.3rem; }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px;
-      background: rgba(0,0,0,0.2);
-      border-radius: 12px;
-      margin-bottom: 12px;
-      transition: all 0.3s;
-    }
-
-    .contact-item:hover {
-      background: rgba(255,255,255,0.05);
-      transform: translateX(5px);
-    }
-
-    .contact-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
-
-    .contact-icon.whatsapp { background: rgba(34, 197, 94, 0.15); }
-    .contact-icon.phone { background: rgba(59, 130, 246, 0.15); }
-    .contact-icon.email { background: rgba(139, 92, 246, 0.15); }
-
-    .contact-item div { flex: 1; }
-    .contact-item strong { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
-    .contact-item span { font-size: 1.1rem; font-weight: 600; }
-    .contact-item a { color: inherit; }
-    .contact-item a:hover { color: var(--blue); }
-
-    .response-time {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 24px;
-      padding: 16px;
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.2);
-      border-radius: 12px;
+    .service-preview-card p {
+      color: var(--muted);
+      margin: 0 0 20px;
       font-size: 0.95rem;
     }
 
-    .response-time strong { color: var(--green); }
-
-    /* Availability Badge */
-    .availability {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.3);
-      border-radius: 100px;
-      font-size: 0.9rem;
-      margin-bottom: 24px;
+    .price-from {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--green);
     }
 
-    .availability-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+    .view-all-btn {
+      text-align: center;
+      margin-top: 40px;
     }
 
     /* Footer */
     .footer {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 60px 24px;
+      padding: 40px 24px;
       text-align: center;
       border-top: 1px solid rgba(255,255,255,0.05);
     }
 
-    .footer p { color: var(--muted); margin: 0 0 16px; }
+    .footer p { color: var(--muted); margin: 0 0 16px; font-size: 0.9rem; }
 
     .footer-links {
       display: flex;
@@ -834,59 +477,22 @@
 
     .footer-links a:hover { color: #fff; }
 
-    /* Back to top */
-    .back-to-top {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      z-index: 99;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(15,23,42,0.8);
-      backdrop-filter: blur(10px);
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(20px);
-      transition: all 0.4s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .back-to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
-    .back-to-top:hover { background: var(--blue); border-color: var(--blue); }
-
     /* Responsive */
     @media (max-width: 980px) {
-      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero { grid-template-columns: 1fr; text-align: center; min-height: auto; padding: 40px 24px; }
       .hero-text { margin: 24px auto 0; }
       .hero-buttons { justify-content: center; }
       .hero-price { margin: 24px auto 0; }
       .hero-visual { display: none; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .services-grid { grid-template-columns: 1fr; }
+      .services-preview { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
       .navbar { flex-direction: column; padding: 16px; }
       .nav-links { gap: 4px; justify-content: center; }
       .section { padding: 60px 20px; }
-      .cta-section { padding: 50px 24px; margin: 0 20px 60px; }
-      .service-card { padding: 30px 24px; }
+      .trust-badges { gap: 16px; }
     }
-
-    /* Reveal animation */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
@@ -898,18 +504,18 @@
     <!-- Navbar -->
     <div class="navbar-wrap">
       <nav class="navbar">
-        <div class="logo"><span class="logo-dot"></span> Katlego.Dev</div>
+        <a href="index.html" class="logo"><span class="logo-dot"></span> Katlego.Dev</a>
         <ul class="nav-links">
-          <li><a href="#services">Services</a></li>
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="services.html">Services & Pricing</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
 
     <!-- Hero -->
-    <section class="hero" id="top">
+    <section class="hero">
       <div>
         <p class="eyebrow">💼 Available for Projects in Pretoria & Surrounding Areas</p>
         <h1><span class="gradient-text">Websites & IT Support</span><br>for Small Businesses</h1>
@@ -924,7 +530,7 @@
         </div>
         <div class="hero-buttons">
           <a href="https://wa.me/27627313073?text=Hi%20Katlego,%20I'm%20interested%20in%20a%20website%20for%20my%20business" target="_blank" rel="noopener" class="btn primary">📱 WhatsApp Me Now</a>
-          <a href="#services" class="btn secondary">See Services & Pricing</a>
+          <a href="services.html" class="btn secondary">See Services & Pricing</a>
         </div>
       </div>
 
@@ -961,313 +567,43 @@
 
     <!-- Trust Badges -->
     <div class="trust-badges">
-      <div class="trust-badge">✅ WhatsApp Integration Included</div>
-      <div class="trust-badge">✅ Mobile-Friendly Design</div>
+      <div class="trust-badge">✅ WhatsApp Integration</div>
+      <div class="trust-badge">✅ Mobile-Friendly</div>
       <div class="trust-badge">✅ Google Maps Setup</div>
       <div class="trust-badge">✅ Based in Pretoria</div>
     </div>
 
-    <!-- Services Section -->
-    <section id="services" class="section reveal">
+    <!-- Services Preview -->
+    <section class="section">
       <div class="section-heading">
-        <div class="section-tag">Services & Pricing</div>
-        <h2>Three ways I can help your business</h2>
-        <p class="section-sub">Choose the service that fits your needs. All prices are transparent — no hidden fees.</p>
+        <h2>What I Offer</h2>
       </div>
 
-      <div class="services-grid">
-        <!-- Service 1: Websites -->
-        <div class="service-card featured">
-          <span class="popular-badge">Most Popular</span>
-          <div class="service-icon web">🌐</div>
-          <h3>Small Business Websites</h3>
-          <p>Professional one-page websites that help customers find and contact you online.</p>
-          
-          <div class="price-tag">R800 <span>– R1,500</span></div>
-          
-          <ul class="service-features">
-            <li><span class="check">✓</span> One-page "online flyer" design</li>
-            <li><span class="check">✓</span> WhatsApp click-to-chat button</li>
-            <li><span class="check">✓</span> Google Maps location</li>
-            <li><span class="check">✓</span> Contact form</li>
-            <li><span class="check">✓</span> Mobile-friendly (works on phones)</li>
-            <li><span class="check">✓</span> Social media links</li>
-            <li><span class="check">✓</span> Your photos & business info</li>
-          </ul>
+      <div class="services-preview">
+        <a href="services.html#websites" class="service-preview-card">
+          <div class="icon">🌐</div>
+          <h3>Business Websites</h3>
+          <p>Professional one-page sites with WhatsApp, Google Maps & contact forms</p>
+          <div class="price-from">From R800</div>
+        </a>
 
-          <p style="font-size:0.9rem;color:var(--muted);margin-bottom:20px;">
-            <strong>Perfect for:</strong> Hair salons, spaza shops, car washes, takeaways, 
-            funeral parlours, construction companies, tutors, mechanics, and more.
-          </p>
+        <a href="services.html#templates" class="service-preview-card">
+          <div class="icon">🎨</div>
+          <h3>Reseller Templates</h3>
+          <p>Ready-made templates for perfume, sneaker & cosmetic sellers</p>
+          <div class="price-from">From R150</div>
+        </a>
 
-          <a href="https://wa.me/27627313073?text=Hi%20Katlego,%20I'm%20interested%20in%20a%20business%20website" target="_blank" rel="noopener" class="service-cta primary">Get a Free Quote</a>
-        </div>
-
-        <!-- Service 2: Templates -->
-        <div class="service-card">
-          <div class="service-icon template">🎨</div>
-          <h3>Reseller Website Templates</h3>
-          <p>Ready-made website templates for side-hustle sellers who want their own online store.</p>
-          
-          <div class="price-tag">R150 <span>– R250</span></div>
-          
-          <ul class="service-features">
-            <li><span class="check">✓</span> Perfume shop template</li>
-            <li><span class="check">✓</span> Sneaker reseller template</li>
-            <li><span class="check">✓</span> Cosmetics/accessories template</li>
-            <li><span class="check">✓</span> Product gallery layout</li>
-            <li><span class="check">✓</span> Easy to customize</li>
-            <li><span class="check">✓</span> WhatsApp order integration</li>
-          </ul>
-
-          <p style="font-size:0.9rem;color:var(--muted);margin-bottom:20px;">
-            <strong>Perfect for:</strong> Perfume resellers, sneaker sellers, cosmetic sellers, 
-            phone accessory sellers, and online traders.
-          </p>
-
-          <a href="https://wa.me/27627313073?text=Hi%20Katlego,%20I'm%20interested%20in%20a%20website%20template" target="_blank" rel="noopener" class="service-cta secondary">View Templates</a>
-        </div>
-
-        <!-- Service 3: IT Support -->
-        <div class="service-card">
-          <div class="service-icon support">🔧</div>
-          <h3>IT Support & Tech Help</h3>
-          <p>Practical tech support for everyday problems. I come to you or help remotely.</p>
-          
-          <div class="price-tag">R50 <span>– R200</span></div>
-          
-          <ul class="service-features">
-            <li><span class="check">✓</span> New phone/laptop setup</li>
-            <li><span class="check">✓</span> Data transfer between devices</li>
-            <li><span class="check">✓</span> Virus & slow computer cleanup</li>
-            <li><span class="check">✓</span> Router/WiFi setup</li>
-            <li><span class="check">✓</span> Printer setup & troubleshooting</li>
-            <li><span class="check">✓</span> CV formatting & typing</li>
-            <li><span class="check">✓</span> Document scanning & emailing</li>
-          </ul>
-
-          <p style="font-size:0.9rem;color:var(--muted);margin-bottom:20px;">
-            <strong>Perfect for:</strong> Home users, small offices, students, and anyone 
-            who needs reliable tech help without the jargon.
-          </p>
-
-          <a href="https://wa.me/27627313073?text=Hi%20Katlego,%20I%20need%20IT%20support" target="_blank" rel="noopener" class="service-cta secondary">Book Support</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- How It Works -->
-    <section id="how-it-works" class="section reveal">
-      <div class="section-heading">
-        <div class="section-tag">Simple Process</div>
-        <h2>How it works — from idea to live website</h2>
+        <a href="services.html#support" class="service-preview-card">
+          <div class="icon">🔧</div>
+          <h3>IT Support</h3>
+          <p>Device setup, virus cleanup, WiFi, printing & document help</p>
+          <div class="price-from">From R50</div>
+        </a>
       </div>
 
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-number">1</div>
-          <h3>Send a WhatsApp</h3>
-          <p>Tell me about your business and what you need. I'll ask a few questions and give you a clear quote.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">2</div>
-          <h3>Share Your Info</h3>
-          <p>Send me your business details, photos, and any ideas you have. Don't worry if you're not sure — I'll guide you.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">3</div>
-          <h3>I Build Your Site</h3>
-          <p>I'll create your website and send you a preview link. You can request changes until you're happy.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-number">4</div>
-          <h3>Go Live!</h3>
-          <p>Once approved, your site goes live. I'll show you how to update it or make changes in the future.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Target Businesses -->
-    <section class="section reveal">
-      <div class="section-heading">
-        <div class="section-tag">Who I Help</div>
-        <h2>Businesses that benefit most from my services</h2>
-      </div>
-
-      <div class="business-grid">
-        <div class="business-card">
-          <div class="business-icon">💈</div>
-          <h4>Hair Salons & Barbers</h4>
-          <p>Show your styles, prices, and booking info</p>
-        </div>
-        <div class="business-card">
-          <div class="business-icon">🛒</div>
-          <h4>Spaza Shops & Tuckshops</h4>
-          <p>Let customers know what you stock</p>
-        </div>
-        <div class="business-card">
-          <div class="business-icon">🚗</div>
-          <h4>Car Washes & Mechanics</h4>
-          <p>Services, prices, and location</p>
-        </div>
-        <div class="business-card">
-          <div class="business-icon">🍔</div>
-          <h4>Food & Takeaways</h4>
-          <p>Menu, hours, and WhatsApp orders</p>
-        </div>
-        <div class="business-card">
-          <div class="business-icon">🏗️</div>
-          <h4>Construction & Trades</h4>
-          <p>Portfolio of work and contact details</p>
-        </div>
-        <div class="business-card">
-          <div class="business-icon">🎓</div>
-          <h4>Tutors & Services</h4>
-          <p>Subjects, rates, and availability</p>
-        </div>
-        <div class="business-card">
-          <div class="business-icon">⚰️</div>
-          <h4>Funeral Parlours</h4>
-          <p>Services, packages, and 24/7 contact</p>
-        </div>
-        <div class="business-card">
-          <div class="business-icon">👟</div>
-          <h4>Resellers & Side Hustles</h4>
-          <p>Product galleries and WhatsApp sales</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="section reveal">
-      <div class="section-heading">
-        <div class="section-tag">Proof of Work</div>
-        <h2>Projects I've built</h2>
-        <p class="section-sub">Real websites and templates you can see right now.</p>
-      </div>
-
-      <div class="portfolio-grid">
-        <div class="portfolio-card">
-          <div class="portfolio-preview">📦</div>
-          <div class="portfolio-content">
-            <h3>Boxed Products Website</h3>
-            <p>Live business website with multi-page layout, Google Analytics, and ongoing improvements.</p>
-            <div class="portfolio-tags">
-              <span class="portfolio-tag">Live Site</span>
-              <span class="portfolio-tag">Business</span>
-            </div>
-            <a href="https://electrokattco-collab.github.io/boxedProducts/" target="_blank" rel="noopener" style="display:inline-block;margin-top:16px;color:var(--blue);font-weight:600;">View Live Site →</a>
-          </div>
-        </div>
-
-        <div class="portfolio-card">
-          <div class="portfolio-preview">🧴</div>
-          <div class="portfolio-content">
-            <h3>Perfume Store Web App</h3>
-            <p>Full e-commerce style project with product listings, search, cart, and payment flow.</p>
-            <div class="portfolio-tags">
-              <span class="portfolio-tag">E-Commerce</span>
-              <span class="portfolio-tag">Template</span>
-            </div>
-            <a href="mailto:electrokatt.co@gmail.com?subject=Perfume%20Store%20Demo%20Request" style="display:inline-block;margin-top:16px;color:var(--blue);font-weight:600;">Request Demo →</a>
-          </div>
-        </div>
-
-        <div class="portfolio-card">
-          <div class="portfolio-preview">👟</div>
-          <div class="portfolio-content">
-            <h3>Tekkie Business Website</h3>
-            <p>First independent project for a sneaker business with product display and EFT ideas.</p>
-            <div class="portfolio-tags">
-              <span class="portfolio-tag">Client Project</span>
-              <span class="portfolio-tag">Small Business</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section reveal">
-      <h2>Ready to get your business online?</h2>
-      <p>Most projects completed within 3–5 days. WhatsApp me now for a free quote.</p>
-      <div class="cta-buttons">
-        <a href="https://wa.me/27627313073?text=Hi%20Katlego,%20I'm%20interested%20in%20getting%20a%20website" target="_blank" rel="noopener" class="btn primary">💬 Chat on WhatsApp</a>
-        <a href="tel:+27627313073" class="btn secondary">📞 Call Me: 062 731 3073</a>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section reveal">
-      <div class="section-heading">
-        <div class="section-tag">Get In Touch</div>
-        <h2>Let's talk about your project</h2>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact-card">
-          <div class="availability">
-            <span class="availability-dot"></span>
-            <span>Currently accepting new projects</span>
-          </div>
-          
-          <h3>Contact Details</h3>
-          
-          <a href="https://wa.me/27627313073" target="_blank" rel="noopener" class="contact-item">
-            <div class="contact-icon whatsapp">💬</div>
-            <div>
-              <strong>WhatsApp</strong>
-              <span>062 731 3073</span>
-            </div>
-          </a>
-
-          <a href="tel:+27627313073" class="contact-item">
-            <div class="contact-icon phone">📞</div>
-            <div>
-              <strong>Phone</strong>
-              <span>062 731 3073</span>
-            </div>
-          </a>
-
-          <a href="mailto:electrokatt.co@gmail.com" class="contact-item">
-            <div class="contact-icon email">✉️</div>
-            <div>
-              <strong>Email</strong>
-              <span>electrokatt.co@gmail.com</span>
-            </div>
-          </a>
-
-          <div class="response-time">
-            <span>⚡</span>
-            <span><strong>Fast Response:</strong> I usually reply within 2 hours during business hours</span>
-          </div>
-        </div>
-
-        <div class="contact-card">
-          <h3>Why Work With Me?</h3>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;gap:12px;">
-              <span style="color:var(--green);">✓</span>
-              <span><strong>Local & Available:</strong> Based in Meyerspark, Pretoria. I understand local businesses.</span>
-            </li>
-            <li style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;gap:12px;">
-              <span style="color:var(--green);">✓</span>
-              <span><strong>No Tech Jargon:</strong> I explain everything in plain language you understand.</span>
-            </li>
-            <li style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;gap:12px;">
-              <span style="color:var(--green);">✓</span>
-              <span><strong>Transparent Pricing:</strong> Fixed prices. No surprises or hidden costs.</span>
-            </li>
-            <li style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;gap:12px;">
-              <span style="color:var(--green);">✓</span>
-              <span><strong>Fast Turnaround:</strong> Most websites ready in 3–5 days.</span>
-            </li>
-            <li style="padding:12px 0;display:flex;gap:12px;">
-              <span style="color:var(--green);">✓</span>
-              <span><strong>Ongoing Support:</strong> I'm here if you need updates or changes later.</span>
-            </li>
-          </ul>
-        </div>
+      <div class="view-all-btn">
+        <a href="services.html" class="btn primary">View All Services & Pricing</a>
       </div>
     </section>
 
@@ -1275,44 +611,13 @@
     <footer class="footer">
       <p>© 2026 Katlego Plessie | Websites & IT Support for Small Businesses in Pretoria</p>
       <div class="footer-links">
+        <a href="services.html">Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
         <a href="https://wa.me/27627313073" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="tel:+27627313073">Phone</a>
-        <a href="mailto:electrokatt.co@gmail.com">Email</a>
       </div>
     </footer>
   </div>
-
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
-
-  <script>
-    // Reveal on scroll
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-
-    // Back to top button
-    const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      backToTop.classList.toggle('show', window.scrollY > 600);
-    });
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-  </script>
 </body>
 </html>
